@@ -1,46 +1,34 @@
 import React, { useReducer } from 'react';
+import './App.css';
 
-// Context y reducer definidos directamente aquí
 const AppContext = React.createContext();
 
-// Reducer
 const appReducer = (state, action) => {
-  switch (action.type) {
-    case 'SET_USER':
-      return { ...state, user: action.payload };
-    case 'ADD_PRODUCT':
-      return { 
-        ...state, 
-        products: [...state.products, { 
-          id: Date.now(), 
-          name: action.payload.name, 
-          price: action.payload.price,
-          inStock: true 
-        }] 
-      };
-    case 'TOGGLE_STOCK':
-      return {
-        ...state,
-        products: state.products.map(product => 
-          product.id === action.payload 
-            ? { ...product, inStock: !product.inStock }
-            : product
-        )
-      };
-    case 'SET_CURRENT_PAGE':
-      return { ...state, currentPage: action.payload };
-    case 'UPDATE_SCORE':
-      return { ...state, gameScore: state.gameScore + action.payload };
-    case 'RESET_SCORE':
-      return { ...state, gameScore: 0 };
-    case 'SET_THEME':
-      return { ...state, theme: action.payload };
-    case 'CLEAR_PRODUCTS':
-      return { ...state, products: [] };
-    default:
-      return state;
-  }
+    switch (action.type) {
+        case 'SET_USER':
+            return { ...state, user: action.payload };
+        case 'ADD_PRODUCT':
+            return {
+                ...state,
+                products: [...state.products, {
+                    id: Date.now(),
+                    name: action.payload.name,
+                    price: action.payload.price,
+                    inStock: true
+                }]
+            };
+        case 'TOGGLE_STOCK':
+            return {
+                ...state,
+                products: state.products.map(product =>
+                    product.id === action.payload ? { ...product, inStock: !product.inStock } : product
+                )
+            };
+        default:
+            return state;
+    }
 };
+
 
 // Initial State
 const initialState = {
